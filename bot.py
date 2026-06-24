@@ -1,10 +1,10 @@
 import logging
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = "8642204656:AAG7bC8iFrxIMb1d8p4XMfwZJBoycEai4NE"
 MY_ID = 728141177
-MY_NAMES = ["ruslan", "@ruslanomr"]
+MY_NAMES = ["руслан", "@ruslanomr"]
 
 logging.basicConfig(level=logging.INFO)
 
@@ -35,16 +35,20 @@ async def check_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
             link = f"https://t.me/c/{chat_id_str}/{message.message_id}"
 
         notification = (
-            f"Task for you\n\n"
-            f"From: {sender}\n"
-            f"Group: {group_name}\n\n"
-            f"Text:\n{message.text}\n\n"
-            f"Link: {link}"
+            f"ZADACHA DLYA RUSLANA\n\n"
+            f"Ot: {sender}\n"
+            f"Gruppa: {group_name}\n\n"
+            f"Soobshenie:\n{message.text}\n\n"
+            f"Pereiti: {link}"
         )
+
+        keyboard = [[InlineKeyboardButton("Открыть сообщение", url=link)]]
+        reply_markup = InlineKeyboardMarkup(keyboard)
 
         await context.bot.send_message(
             chat_id=MY_ID,
-            text=notification
+            text=notification,
+            reply_markup=reply_markup
         )
 
 def main():
