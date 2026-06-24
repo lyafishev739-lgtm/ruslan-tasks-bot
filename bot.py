@@ -1,11 +1,10 @@
 import logging
-import asyncio
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = "8642204656:AAG7bC8iFrxIMb1d8p4XMfwZJBoycEai4NE"
 MY_ID = 728141177
-MY_NAMES = ["руслан", "ruslan", "@ruslanomr"]
+MY_NAMES = ["ruslan", "@ruslanomr"]
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,8 +25,8 @@ async def check_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if mentioned or reply_to_me:
         chat = message.chat
-        sender = message.from_user.full_name if message.from_user else "Неизвестно"
-        group_name = chat.title or "Группа"
+        sender = message.from_user.full_name if message.from_user else "Unknown"
+        group_name = chat.title or "Group"
 
         if chat.username:
             link = f"https://t.me/{chat.username}/{message.message_id}"
@@ -36,7 +35,23 @@ async def check_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
             link = f"https://t.me/c/{chat_id_str}/{message.message_id}"
 
         notification = (
-            f"📌 *Задача для тебя*\n\n"
-            f"👤 От: {sender}\n"
-            f"💬 Группа: {group_name}\n\n"
-            f"📝 *
+            f"Task for you\n\n"
+            f"From: {sender}\n"
+            f"Group: {group_name}\n\n"
+            f"Text:\n{message.text}\n\n"
+            f"Link: {link}"
+        )
+
+        await context.bot.send_message(
+            chat_id=MY_ID,
+            text=notification
+        )
+
+def main():
+    app = Application.builder().token(BOT_TOKEN).build()
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, check_mention))
+    print("Bot started...")
+    app.run_polling(drop_pending_updates=True)
+
+if __name__ == "__main__":
+    main()
