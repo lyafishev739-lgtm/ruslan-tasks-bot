@@ -4,7 +4,7 @@ from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = "8642204656:AAG7bC8iFrxIMb1d8p4XMfwZJBoycEai4NE"
 MY_ID = 728141177
-MY_NAMES = ["руслан", "@ruslanomr"]
+MY_NAMES = ["\u0440\u0443\u0441\u043b\u0430\u043d", "@ruslanomr"]
 
 logging.basicConfig(level=logging.INFO)
 
@@ -35,14 +35,13 @@ async def check_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
             link = f"https://t.me/c/{chat_id_str}/{message.message_id}"
 
         notification = (
-            f"ZADACHA DLYA RUSLANA\n\n"
-            f"Ot: {sender}\n"
-            f"Gruppa: {group_name}\n\n"
-            f"Soobshenie:\n{message.text}\n\n"
-            f"Pereiti: {link}"
+            f"--- \u0417\u0410\u0414\u0410\u0427\u0410 \u0414\u041b\u042f \u0420\u0423\u0421\u041b\u0410\u041d\u0410 ---\n\n"
+            f"\u041e\u0442: {sender}\n"
+            f"\u0413\u0440\u0443\u043f\u043f\u0430: {group_name}\n\n"
+            f"\u0421\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435:\n{message.text}"
         )
 
-        keyboard = [[InlineKeyboardButton("Открыть сообщение", url=link)]]
+        keyboard = [[InlineKeyboardButton("\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435", url=link)]]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await context.bot.send_message(
