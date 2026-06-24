@@ -2,7 +2,7 @@ import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
-BOT_TOKEN = 8642204656:AAEZfAF5EYWOHcs-gv1HzzQjRAI6m_DW6js
+BOT_TOKEN = "8642204656:AAEZfAF5EYWOHcs-gv1HzzQjRAI6m_DW6js"
 MY_ID = 728141177
 MY_NAMES = ["\u0440\u0443\u0441\u043b\u0430\u043d", "@ruslanomr"]
 
