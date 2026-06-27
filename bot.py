@@ -5,7 +5,7 @@ from telegram.ext import Application, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 MY_ID = 728141177
-MY_NAMES = ["\u0440\u0443\u0441\u043b\u0430\u043d", "@ruslanomr"]
+MY_NAMES = ["@ruslanomr"]
 
 logging.basicConfig(level=logging.INFO)
 
